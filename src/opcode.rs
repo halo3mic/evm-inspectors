@@ -73,10 +73,10 @@ where
         // update gas usage for the last opcode
         if let Some((opcode, gas_remaining)) = self.last_opcode_gas_remaining.take() {
             let gas_table =
-                revm::interpreter::instructions::opcode::spec_opcode_gas(context.spec_id());
+                revm::interpreter::opcode::OPCODE_INFO_JUMPTABLE;
             let opcode_gas_info = gas_table[opcode.get() as usize];
 
-            let mut gas_cost = opcode_gas_info.get_gas() as u64;
+            let mut gas_cost = 0;
             // if gas cost is 0 then this is dynamic gas and we need to use the tracked gas
             if gas_cost == 0 {
                 gas_cost = gas_remaining.saturating_sub(interp.gas().remaining());

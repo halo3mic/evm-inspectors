@@ -54,11 +54,16 @@ impl GethTraceBuilder {
             let mut log = step.convert_to_geth_struct_log(opts);
 
             // Fill in memory and storage depending on the options
+            // println!("Stooooorage is enabled: {:?}", opts.is_storage_enabled());
             if opts.is_storage_enabled() {
                 let contract_storage = storage.entry(step.contract).or_default();
+                // println!("Storage change: {:?}", step.storage_change);
                 if let Some(change) = step.storage_change {
+                    // println!("{:?} :: storage change: {:?} -> {:?}", step.contract, change.key, change.value);
                     contract_storage.insert(change.key.into(), change.value.into());
                     log.storage = Some(contract_storage.clone());
+                } else {
+                    // println!("No storage change");
                 }
             }
 

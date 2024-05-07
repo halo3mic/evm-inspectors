@@ -10,7 +10,7 @@ use alloy_rpc_types_trace::parity::*;
 use revm::{
     db::DatabaseRef,
     interpreter::{
-        opcode::{self, spec_opcode_gas},
+        opcode::{self},
         OpCode,
     },
     primitives::{Account, ExecutionResult, ResultAndState, SpecId, KECCAK_EMPTY},
@@ -398,9 +398,9 @@ impl ParityTraceBuilder {
 
         let cost = self
             .spec_id
-            .and_then(|spec_id| {
-                spec_opcode_gas(spec_id).get(step.op.get() as usize).map(|op| op.get_gas())
-            })
+            // .and_then(|spec_id| {
+            //     spec_opcode_gas(spec_id).get(step.op.get() as usize).map(|op| op.get_gas())
+            // })
             .unwrap_or_default();
 
         VmInstruction {

@@ -57,14 +57,14 @@ where
             return None;
         }
 
-        if !inputs.transfer.value.is_zero() {
-            self.transfers.push(TransferOperation {
-                kind: TransferKind::Call,
-                from: inputs.transfer.source,
-                to: inputs.transfer.target,
-                value: inputs.transfer.value,
-            });
-        }
+        // if !inputs.transfer.value.is_zero() {
+        //     self.transfers.push(TransferOperation {
+        //         kind: TransferKind::Call,
+        //         from: inputs.transfer.source,
+        //         to: inputs.transfer.target,
+        //         value: inputs.transfer.value,
+        //     });
+        // }
 
         None
     }
